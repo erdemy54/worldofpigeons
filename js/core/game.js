@@ -76,7 +76,7 @@ window.GameController = (function () {
         }
 
         if (window.TimeManager) {
-            window.TimeManager.init();
+            window.TimeManager.start();
         }
 
         // Initialize economy with saved values
