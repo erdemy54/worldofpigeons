@@ -11,7 +11,7 @@ window.MarketSystem = (function () {
     function generateListings(playerLevel) {
         const listings = [];
         const level = playerLevel || 1;
-        const breedIds = window.BreedsDB ? window.BreedsDB.getAllBreedIds() : ['turk_taklacisi'];
+        const breedIds = window.BreedsDB ? window.BreedsDB.getAllBreedIds() : ['bursa_oynari'];
 
         // Generate 3-6 pigeon listings
         const count = Math.floor(Math.random() * 4) + 3;
@@ -24,7 +24,7 @@ window.MarketSystem = (function () {
                 return tierIdx <= Math.floor(level / 3) + 2;
             });
 
-            const breedId = availableBreeds[Math.floor(Math.random() * availableBreeds.length)] || 'turk_taklacisi';
+            const breedId = availableBreeds[Math.floor(Math.random() * availableBreeds.length)] || 'bursa_oynari';
 
             if (window.GeneticsSystem) {
                 const pigeon = window.GeneticsSystem.createPigeon(breedId, {

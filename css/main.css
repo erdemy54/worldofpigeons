@@ -6,51 +6,51 @@
 
 /* ---- CSS Custom Properties (Design Tokens) ---- */
 :root {
-    /* Primary palette */
+    /* Primary palette (Navy for Text & Accents) */
     --navy-900: #050d1a;
     --navy-800: #0a1628;
     --navy-700: #0f1f38;
     --navy-600: #162a4a;
-    --navy-500: #1e3a5f;
-    --navy-400: #2a4d7a;
     
-    /* Core Colors - Gilded Heritage Theme */
-    --color-bg-base: #051024;
-    --color-bg-panel: rgba(10, 22, 40, 0.75);
-    --color-bg-panel-hover: rgba(20, 35, 60, 0.85);
+    /* Core Colors - Gilded Heritage Light Theme */
+    --color-bg-base: #F9F6F0; /* Ivory / Cream */
+    --color-bg-panel: rgba(255, 255, 255, 0.95);
+    --color-bg-panel-hover: rgba(255, 255, 255, 1);
     
-    --color-primary: #d4a853;     /* Gold */
-    --color-primary-light: #f0d78c;
-    --color-primary-dark: #b8892a;
+    --color-primary: #D4A853;     /* Gold */
+    --color-primary-light: #F0D78C;
+    --color-primary-dark: #B8892A;
+    --color-accent: #8B0000;      /* Dark Red / Burgundy for highlights */
     
-    --color-text-main: #e2e8f0;
-    --color-text-muted: #94a3b8;
+    --text-primary: #0B132B;   /* Very dark navy text for high contrast */
+    --text-secondary: #4A5568;  /* Muted dark grey-blue */
+    --color-text-inverse: #FFFFFF; /* White text on dark buttons */
     
-    /* Quality tier colors */
-    --tier-b: #8a8a8a;
-    --tier-b-plus: #a0a0a0;
-    --tier-a: #4caf50;
-    --tier-a-plus: #2196f3;
-    --tier-s: #9c27b0;
-    --tier-s-plus: #7b1fa2;
-    --tier-ss: #ff9800;
-    --tier-ss-plus: #f57c00;
-    --tier-ssr: linear-gradient(135deg, #ff4444, #ffaa00, #ff4444);
+    /* Quality tier colors (adjusted for light bg) */
+    --tier-b: #6b7280;
+    --tier-b-plus: #4b5563;
+    --tier-a: #059669;
+    --tier-a-plus: #2563eb;
+    --tier-s: #7c3aed;
+    --tier-s-plus: #6d28d9;
+    --tier-ss: #ea580c;
+    --tier-ss-plus: #c2410c;
+    --tier-ssr: linear-gradient(135deg, #dc2626, #d97706, #dc2626);
     
     /* Functional colors */
-    --success: #4caf50;
-    --warning: #ff9800;
-    --danger: #f44336;
-    --info: #2196f3;
-    --health-green: #66bb6a;
-    --health-yellow: #fdd835;
-    --health-red: #ef5350;
+    --success: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --info: #2563eb;
+    --health-green: #10b981;
+    --health-yellow: #fbbf24;
+    --health-red: #ef4444;
     
-    /* Glass effect */
-    --glass-bg: rgba(15, 31, 56, 0.75);
-    --glass-border: rgba(212, 168, 83, 0.15);
-    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    --glass-blur: blur(16px);
+    /* Panel & Card Effect */
+    --glass-bg: rgba(255, 255, 255, 0.95);
+    --glass-border: rgba(212, 168, 83, 0.4);
+    --glass-shadow: 0 4px 20px rgba(11, 19, 43, 0.08);
+    --glass-blur: blur(8px);
     
     /* Spacing */
     --space-xs: 4px;
@@ -70,9 +70,9 @@
     /* Typography */
     --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-display: 'Outfit', 'Inter', sans-serif;
-    --font-size-xs: 0.7rem;
-    --font-size-sm: 0.8rem;
-    --font-size-md: 0.95rem;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.85rem;
+    --font-size-md: 1rem;
     --font-size-lg: 1.15rem;
     --font-size-xl: 1.4rem;
     --font-size-2xl: 1.8rem;
@@ -84,8 +84,8 @@
     --transition-slow: 400ms ease-out;
     
     /* Layout */
-    --hud-height: 52px;
-    --nav-height: 64px;
+    --hud-height: 56px;
+    --nav-height: 70px;
     --safe-area-top: env(safe-area-inset-top, 0px);
     --safe-area-bottom: env(safe-area-inset-bottom, 0px);
 }
@@ -104,7 +104,7 @@ html, body {
     font-family: var(--font-ui);
     font-size: 16px;
     color: var(--text-primary);
-    background: var(--navy-900);
+    background: var(--color-bg-base);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     touch-action: manipulation;

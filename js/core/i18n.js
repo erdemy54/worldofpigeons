@@ -73,31 +73,19 @@
       },
 
       // ── Breeds ──
-      breeds: {
-        turk_taklacisi: 'Türk Taklacısı',
-        sivas_taklacisi: 'Sivas Taklacısı',
-        kayseri_taklacisi: 'Kayseri Taklacısı',
-        kelebek: 'Kelebek',
-        sanliurfa_taklacisi: 'Şanlıurfa Taklacısı',
-        mardin_guvercini: 'Mardin Güvercini',
-        filo_guvercini: 'Filo Güvercini',
-        posta_guvercini: 'Posta Güvercini',
-        ankut_guvercini: 'Ankut Güvercini',
-        misiri: 'Mısıri'
+      breed: {
+        hunkari: 'Hünkâri (Klasik Manisa)',
+        bursa_oynari: 'Bursa Oynarı',
+        sebap: 'Şebap (Kostüm)',
+        diyarbakir: 'Diyarbakır'
       },
 
       // ── Breed Descriptions ──
       breed_desc: {
-        turk_taklacisi: 'Havada zarif taklalar atan geleneksel Türk güvercini.',
-        sivas_taklacisi: 'Sivas yöresine özgü, yüksek dayanıklılıkta taklacı.',
-        kayseri_taklacisi: 'Kayseri bölgesinin gözde taklacı ırkı.',
-        kelebek: 'Kelebek kanat hareketleriyle bilinen zarif ırk.',
-        sanliurfa_taklacisi: 'Güneydoğu\'nun sıcağına dayanıklı taklacı.',
-        mardin_guvercini: 'Mardin\'in tarihi sokaklarında yetiştirilen asil ırk.',
-        filo_guvercini: 'Sürü uçuşunda mükemmel koordinasyon sergiler.',
-        posta_guvercini: 'Uzun mesafe yön bulma yeteneğiyle ünlü.',
-        ankut_guvercini: 'Anadolu\'nun sert iklimine dayanıklı güçlü ırk.',
-        misiri: 'Mısır kökenli, egzotik görünümlü güvercin.'
+        hunkari: 'Sarayın Hediyesi. Osmanlı sarayının özel üretimi.',
+        bursa_oynari: 'Yalnız Usta. 600 yıllık geçmiş. Sürüye katılmaz.',
+        sebap: 'Güzellik Kraliçesi. Kusursuz simetri ve ihtişamlı paçalar.',
+        diyarbakir: 'Gökyüzü Tuvali. Form ve renk cümbüşü.'
       },
 
       // ── Breed Families ──
@@ -585,31 +573,19 @@
       },
 
       // ── Breeds ──
-      breeds: {
-        turk_taklacisi: 'Turkish Tumbler',
-        sivas_taklacisi: 'Sivas Tumbler',
-        kayseri_taklacisi: 'Kayseri Tumbler',
-        kelebek: 'Butterfly',
-        sanliurfa_taklacisi: 'Şanlıurfa Tumbler',
-        mardin_guvercini: 'Mardin Pigeon',
-        filo_guvercini: 'Filo Pigeon',
-        posta_guvercini: 'Carrier Pigeon',
-        ankut_guvercini: 'Ankut Pigeon',
-        misiri: 'Egyptian'
+      breed: {
+        hunkari: 'Hunkari (Classic Manisa)',
+        bursa_oynari: 'Bursa Roller',
+        sebap: 'Shebap (Costume)',
+        diyarbakir: 'Diyarbakir'
       },
 
       // ── Breed Descriptions ──
       breed_desc: {
-        turk_taklacisi: 'A traditional Turkish pigeon known for graceful aerial tumbles.',
-        sivas_taklacisi: 'A high-endurance tumbler native to the Sivas region.',
-        kayseri_taklacisi: 'The prized tumbler breed of the Kayseri region.',
-        kelebek: 'An elegant breed known for butterfly-like wing movements.',
-        sanliurfa_taklacisi: 'A heat-resistant tumbler from southeastern Turkey.',
-        mardin_guvercini: 'A noble breed raised in the historic streets of Mardin.',
-        filo_guvercini: 'Exhibits excellent coordination in flock flight.',
-        posta_guvercini: 'Famous for long-distance navigation ability.',
-        ankut_guvercini: 'A hardy breed adapted to Anatolia\'s harsh climate.',
-        misiri: 'An exotic-looking pigeon of Egyptian origin.'
+        hunkari: 'Gift of the Palace. Special breed of the Ottoman palace.',
+        bursa_oynari: 'Lone Master. 600 years of history. Solitary flyer.',
+        sebap: 'Beauty Queen. Perfect symmetry and magnificent feathered feet.',
+        diyarbakir: 'Sky Canvas. A riot of form and color.'
       },
 
       // ── Breed Families ──

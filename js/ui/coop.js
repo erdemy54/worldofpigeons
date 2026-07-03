@@ -314,8 +314,8 @@ window.CoopScreen = (function () {
         if (!window.GeneticsSystem || !window.GameState) return;
 
         // Give 2 starter pigeons (1 male, 1 female Türk Taklacısı)
-        const male = window.GeneticsSystem.createPigeon('turk_taklacisi', { gender: 'male' });
-        const female = window.GeneticsSystem.createPigeon('turk_taklacisi', { gender: 'female' });
+        const male = window.GeneticsSystem.createPigeon('bursa_oynari', { gender: 'male' });
+        const female = window.GeneticsSystem.createPigeon('bursa_oynari', { gender: 'female' });
 
         male.name = 'Aslan';
         female.name = 'Sultan';

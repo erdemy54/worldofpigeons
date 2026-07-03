@@ -33,7 +33,7 @@ window.AttractionSystem = (function () {
     }
 
     function generateStray(guaranteeRare) {
-        const allBreeds = window.BreedsDB ? window.BreedsDB.getAllBreedIds() : ['turk_taklacisi'];
+        const allBreeds = window.BreedsDB ? window.BreedsDB.getAllBreedIds() : ['bursa_oynari'];
 
         // Weighted rarity roll
         let roll = Math.random();
@@ -50,7 +50,7 @@ window.AttractionSystem = (function () {
         } else {
             // Common (B tier)
             const commonBreeds = window.BreedsDB ? window.BreedsDB.getBreedsByTier('B').concat(window.BreedsDB.getBreedsByTier('B+')) : [];
-            breedId = commonBreeds.length > 0 ? commonBreeds[Math.floor(Math.random() * commonBreeds.length)].id : 'turk_taklacisi';
+            breedId = commonBreeds.length > 0 ? commonBreeds[Math.floor(Math.random() * commonBreeds.length)].id : 'bursa_oynari';
         }
 
         // Create the stray pigeon

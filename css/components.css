@@ -41,7 +41,7 @@
     backdrop-filter: var(--glass-blur);
 }
 
-.btn-secondary:hover { background: rgba(15, 31, 56, 0.9); }
+.btn-secondary:hover { background: var(--color-bg-panel-hover); }
 
 .btn-danger {
     background: linear-gradient(135deg, #f44336, #d32f2f);
@@ -124,7 +124,7 @@
     justify-content: flex-end;
     gap: var(--space-sm);
     padding-top: var(--space-sm);
-    border-top: 1px solid rgba(255,255,255,0.05);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 /* Pigeon Card (compact list item) */
@@ -141,7 +141,7 @@
 }
 
 .pigeon-card:hover {
-    background: rgba(15, 31, 56, 0.9);
+    background: var(--color-bg-panel-hover);
     border-color: var(--gold-500);
 }
 

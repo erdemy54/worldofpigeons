@@ -175,8 +175,8 @@ window.GameController = (function () {
     function giveStarterPigeons() {
         if (!window.GeneticsSystem) return;
 
-        const male = window.GeneticsSystem.createPigeon('turk_taklacisi', { gender: 'male' });
-        const female = window.GeneticsSystem.createPigeon('turk_taklacisi', { gender: 'female' });
+        const male = window.GeneticsSystem.createPigeon('bursa_oynari', { gender: 'male' });
+        const female = window.GeneticsSystem.createPigeon('bursa_oynari', { gender: 'female' });
 
         male.name = 'Aslan';
         female.name = 'Sultan';
@@ -185,7 +185,7 @@ window.GameController = (function () {
         
         // Discover starter breed
         if (window.GameController.discoverBreed) {
-            window.GameController.discoverBreed('turk_taklacisi');
+            window.GameController.discoverBreed('bursa_oynari');
         }
         
         window.GameState.isNewPlayer = false;
