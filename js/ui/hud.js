@@ -30,7 +30,7 @@ window.HudController = (function () {
 
     function refreshAll() {
         if (window.EconomySystem) {
-            const currencies = window.EconomySystem.getCurrencies();
+            const currencies = window.EconomySystem.getWallet();
             updateCurrency('feedMoney', currencies.feedMoney);
             updateCurrency('tokens', currencies.tokens);
             updateCurrency('diamonds', currencies.diamonds);

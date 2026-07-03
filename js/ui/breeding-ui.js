@@ -207,33 +207,69 @@ window.BreedingScreen = (function () {
             breedBtn.addEventListener('click', () => {
                 if (!selectedMother || !selectedFather) return;
 
-                if (window.BreedingSystem) {
-                    const result = window.BreedingSystem.startBreeding(selectedMother.id, selectedFather.id);
-                    if (result && result.success) {
-                        if (!window.GameState.activeBreedings) window.GameState.activeBreedings = [];
-                        window.GameState.activeBreedings.push(result.breeding);
+                // DNA Animation overlay
+                const dnaOverlay = document.createElement('div');
+                dnaOverlay.className = 'dna-overlay';
+                dnaOverlay.innerHTML = `
+                    <div class="dna-spiral">🧬</div>
+                    <div style="color:var(--gold-300); font-family:var(--font-display); font-size:1.5rem;">
+                        ${t('breeding.genetics_combining') || 'Genler Birleşiyor...'}
+                    </div>
+                `;
+                document.body.appendChild(dnaOverlay);
+                if (window.AudioManager) window.AudioManager.play('success');
 
-                        if (window.ScreenManager) window.ScreenManager.showToast(t('breeding.started'), 'success');
-                        if (window.AudioManager) window.AudioManager.play('success');
-                    } else {
-                        if (window.ScreenManager) window.ScreenManager.showToast(result?.message || t('breeding.failed'), 'error');
+                setTimeout(() => {
+                    dnaOverlay.remove();
+                    
+                    // Generate Child
+                    let child;
+                    if (window.GeneticsSystem) {
+                        child = window.GeneticsSystem.breedPigeons(selectedMother, selectedFather);
+                        child.lifecycle = 'adult'; // instant adult for MVP
+                        child.age = 45;
+                        if (!window.GameState.pigeons) window.GameState.pigeons = [];
+                        window.GameState.pigeons.push(child);
+                        
+                        if (window.GameController && window.GameController.discoverBreed) {
+                            window.GameController.discoverBreed(child.breedId);
+                        }
+                        if (window.GameController && window.GameController.saveGame) {
+                            window.GameController.saveGame();
+                        }
                     }
-                } else {
-                    // Fallback demo
-                    if (!window.GameState.activeBreedings) window.GameState.activeBreedings = [];
-                    window.GameState.activeBreedings.push({
-                        motherId: selectedMother.id,
-                        fatherId: selectedFather.id,
-                        progress: 0,
-                        remainingDays: 18,
-                        startTime: Date.now()
-                    });
-                    if (window.ScreenManager) window.ScreenManager.showToast(t('breeding.started'), 'success');
-                    if (window.AudioManager) window.AudioManager.play('success');
-                }
 
-                selectedMother = null;
-                selectedFather = null;
+                    // Show Gacha Reveal
+                    if (child) {
+                        const breed = window.BreedsDB ? window.BreedsDB.getBreed(child.breedId) : null;
+                        const breedName = breed ? t(breed.nameKey) : 'Bilinmeyen Irk';
+                        const gradeClass = child.grade.toLowerCase().replace('+', '-plus');
+                        
+                        const gachaOverlay = document.createElement('div');
+                        gachaOverlay.className = 'gacha-reveal';
+                        gachaOverlay.innerHTML = `
+                            <div class="gacha-card">
+                                <div class="gacha-title">${t('breeding.new_arrival') || 'YENİ DOĞUM!'}</div>
+                                <div class="gacha-icon">🕊️</div>
+                                <div class="gacha-grade tier-glow-${gradeClass}">${child.grade}</div>
+                                <div class="gacha-details">
+                                    <div style="font-size:1.5rem; font-weight:bold; margin-bottom:8px;">${breedName}</div>
+                                    <div style="color:var(--text-secondary)">Qi: ${Math.round(child.qi)}</div>
+                                </div>
+                                <button class="btn btn-primary btn-lg" id="btn-gacha-close" style="width:100%">${t('common.continue') || 'Devam Et'}</button>
+                            </div>
+                        `;
+                        document.body.appendChild(gachaOverlay);
+                        if (window.AudioManager) window.AudioManager.play('success'); // or a new epic sound
+                        
+                        gachaOverlay.querySelector('#btn-gacha-close').addEventListener('click', () => {
+                            gachaOverlay.remove();
+                            selectedMother = null;
+                            selectedFather = null;
+                            if (window.ScreenManager) window.ScreenManager.refreshCurrentScreen();
+                        });
+                    }
+                }, 2000);
                 if (window.ScreenManager) window.ScreenManager.refreshCurrentScreen();
             });
         }

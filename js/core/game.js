@@ -26,6 +26,7 @@ window.GameState = {
         diamonds: 5
     },
     quests: null,
+    discoveredBreeds: [],
     activeBreedings: [],
     settings: {
         language: 'tr',
@@ -93,6 +94,7 @@ window.GameController = (function () {
             window.ScreenManager.registerScreen('flight', window.FlightViewScreen);
             window.ScreenManager.registerScreen('flock', window.FlockScreen);
             window.ScreenManager.registerScreen('market', window.MarketScreen);
+            window.ScreenManager.registerScreen('encyclopedia', window.EncyclopediaScreen);
             window.ScreenManager.registerScreen('more', {
                 render: renderMoreScreen
             });
@@ -180,6 +182,12 @@ window.GameController = (function () {
         female.name = 'Sultan';
 
         window.GameState.pigeons.push(male, female);
+        
+        // Discover starter breed
+        if (window.GameController.discoverBreed) {
+            window.GameController.discoverBreed('turk_taklacisi');
+        }
+        
         window.GameState.isNewPlayer = false;
 
         // Recalculate Qi for starters
@@ -302,8 +310,8 @@ window.GameController = (function () {
         window.GameState.lastSaveTime = Date.now();
 
         // Sync economy state
-        if (window.EconomySystem && window.EconomySystem.getCurrencies) {
-            window.GameState.economy = window.EconomySystem.getCurrencies();
+        if (window.EconomySystem && window.EconomySystem.getWallet) {
+            window.GameState.economy = window.EconomySystem.getWallet();
         }
 
         if (window.SaveManager) {
@@ -342,6 +350,11 @@ window.GameController = (function () {
             </div>
 
             <div class="more-menu">
+                <div class="more-menu-item glass-panel" data-action="encyclopedia">
+                    <span class="menu-icon">📖</span>
+                    <span class="menu-label">${t('nav.encyclopedia') || 'Pigeondex'}</span>
+                    <span class="menu-arrow">›</span>
+                </div>
                 <div class="more-menu-item glass-panel" data-action="breeding">
                     <span class="menu-icon">💕</span>
                     <span class="menu-label">${t('breeding.title')}</span>
@@ -383,6 +396,9 @@ window.GameController = (function () {
                     if (window.AudioManager) window.AudioManager.play('ui_click');
 
                     switch (action) {
+                        case 'encyclopedia':
+                            if (window.ScreenManager) window.ScreenManager.pushScreen('encyclopedia', () => window.EncyclopediaScreen.render());
+                            break;
                         case 'breeding':
                             if (window.ScreenManager) window.ScreenManager.pushScreen('breeding', () => window.BreedingScreen.render());
                             break;
@@ -407,7 +423,15 @@ window.GameController = (function () {
         return screen;
     }
 
-    return { init, saveGame, loadGame };
+    function discoverBreed(breedId) {
+        if (!window.GameState.discoveredBreeds) window.GameState.discoveredBreeds = [];
+        if (!window.GameState.discoveredBreeds.includes(breedId)) {
+            window.GameState.discoveredBreeds.push(breedId);
+            saveGame();
+        }
+    }
+
+    return { init, saveGame, loadGame, discoverBreed };
 })();
 
 // ---- AUTO-START ----
