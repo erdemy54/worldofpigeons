@@ -14,21 +14,17 @@
     --navy-500: #1e3a5f;
     --navy-400: #2a4d7a;
     
-    /* Gold palette */
-    --gold-900: #8b6914;
-    --gold-700: #b8892a;
-    --gold-500: #d4a853;
-    --gold-400: #e0be6e;
-    --gold-300: #f0d78c;
-    --gold-200: #f5e4a8;
-    --gold-100: #faf0d0;
+    /* Core Colors - Gilded Heritage Theme */
+    --color-bg-base: #051024;
+    --color-bg-panel: rgba(10, 22, 40, 0.75);
+    --color-bg-panel-hover: rgba(20, 35, 60, 0.85);
     
-    /* Neutrals */
-    --cream: #e8e0d0;
-    --cream-light: #f5f0e5;
-    --text-primary: #f0ead8;
-    --text-secondary: #a8a090;
-    --text-muted: #706858;
+    --color-primary: #d4a853;     /* Gold */
+    --color-primary-light: #f0d78c;
+    --color-primary-dark: #b8892a;
+    
+    --color-text-main: #e2e8f0;
+    --color-text-muted: #94a3b8;
     
     /* Quality tier colors */
     --tier-b: #8a8a8a;
