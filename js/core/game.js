@@ -247,10 +247,8 @@ window.GameController = (function () {
         const deltaTime = (timestamp - lastFrameTime) / 1000; // seconds
         lastFrameTime = timestamp;
 
-        // Update time system
-        if (window.TimeManager) {
-            window.TimeManager.update(deltaTime);
-        }
+        // Time system updates itself internally via setInterval
+        // No manual update needed here
 
         // Render canvas (only when flight view is active)
         if (canvas && ctx && canvas.classList.contains('active')) {
@@ -268,7 +266,7 @@ window.GameController = (function () {
         ctx.clearRect(0, 0, w, h);
 
         // Get current time phase
-        const phase = window.TimeManager ? window.TimeManager.getPhase() : 'day';
+        const phase = window.TimeManager ? window.TimeManager.phase : 'day';
 
         // Render sky
         if (window.SkyRenderer) {

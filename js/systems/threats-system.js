@@ -55,7 +55,7 @@ window.ThreatsSystem = (function () {
     function rollGroundThreat(coopState) {
         if (!window.ThreatsDB) return null;
         const groundThreats = window.ThreatsDB.getGroundThreats();
-        const timePhase = window.TimeManager ? window.TimeManager.getPhase() : 'day';
+        const timePhase = window.TimeManager ? window.TimeManager.phase : 'day';
 
         for (const threat of groundThreats) {
             if (threat.activeTime === 'night' && !['night', 'evening'].includes(timePhase)) continue;
