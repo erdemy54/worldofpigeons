@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="World of Pigeon's — Gerçekçi Türk güvercin yetiştirme ve uçuş simülasyonu oyunu. iOS & Android.">
+    <meta name="theme-color" content="#0a1628">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta property="og:title" content="World of Pigeon's">
+    <meta property="og:description" content="Gökyüzünü senin sürün dolduracak. Gerçekçi güvercin yetiştirme simülasyonu.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://worldofpigeons.com">
+    <title>World of Pigeon's — Gökyüzünü Senin Sürün Dolduracak</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/screens.css">
+
+    <style>
+    /* ============================================================
+       CINEMATIC SPLASH SCREEN
+       ============================================================ */
+    .splash-screen {
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        background: #040a14;
+    }
+
+    /* Full-screen hero background */
+    .splash-bg {
+        position: absolute;
+        inset: 0;
+        background: url('assets/hero_splash.jpg') center center / cover no-repeat;
+        animation: splashBgZoom 12s ease-out forwards;
+        filter: brightness(0.6) saturate(1.2);
+    }
+    .splash-bg::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: 
+            linear-gradient(180deg, 
+                rgba(4,10,20,0.7) 0%, 
+                rgba(4,10,20,0.2) 30%,
+                rgba(4,10,20,0.1) 50%,
+                rgba(4,10,20,0.3) 70%,
+                rgba(4,10,20,0.9) 100%
+            );
+    }
+
+    @keyframes splashBgZoom {
+        0% { transform: scale(1.15); filter: brightness(0) saturate(1.2); }
+        30% { filter: brightness(0.55) saturate(1.2); }
+        100% { transform: scale(1.0); filter: brightness(0.6) saturate(1.2); }
+    }
+
+    /* Floating feather particles (CSS-only) */
+    .splash-feathers {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+    }
+    .feather {
+        position: absolute;
+        font-size: 1.2rem;
+        opacity: 0;
+        animation: featherFall linear infinite;
+    }
+    .feather:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 8s; }
+    .feather:nth-child(2) { left: 25%; animation-delay: 1.5s; animation-duration: 10s; font-size: 0.8rem; }
+    .feather:nth-child(3) { left: 45%; animation-delay: 3s; animation-duration: 9s; }
+    .feather:nth-child(4) { left: 65%; animation-delay: 0.8s; animation-duration: 11s; font-size: 1rem; }
+    .feather:nth-child(5) { left: 80%; animation-delay: 2.2s; animation-duration: 7s; }
+    .feather:nth-child(6) { left: 55%; animation-delay: 4s; animation-duration: 12s; font-size: 0.7rem; }
+    .feather:nth-child(7) { left: 35%; animation-delay: 5.5s; animation-duration: 9.5s; }
+    .feather:nth-child(8) { left: 90%; animation-delay: 1s; animation-duration: 8.5s; font-size: 0.9rem; }
+
+    @keyframes featherFall {
+        0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+        10% { opacity: 0.4; }
+        50% { opacity: 0.3; }
+        90% { opacity: 0.1; }
+        100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+
+    /* Logo group */
+    .splash-content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 0 24px;
+    }
+
+    /* Ornate golden emblem */
+    .splash-emblem {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 16px;
+        position: relative;
+        animation: emblemReveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+    }
+    .splash-emblem-inner {
+        width: 100%;
+        height: 100%;
+        border: 2px solid rgba(212, 168, 83, 0.5);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(circle, rgba(212,168,83,0.15) 0%, rgba(10,22,40,0.8) 70%);
+        box-shadow: 
+            0 0 30px rgba(212,168,83,0.2),
+            inset 0 0 20px rgba(212,168,83,0.1);
+        position: relative;
+    }
+    .splash-emblem-inner::before {
+        content: '';
+        position: absolute;
+        inset: -4px;
+        border: 1px solid rgba(212,168,83,0.25);
+        border-radius: 50%;
+    }
+    .splash-emblem-inner::after {
+        content: '';
+        position: absolute;
+        inset: -8px;
+        border: 1px solid rgba(212,168,83,0.1);
+        border-radius: 50%;
+    }
+    .splash-pigeon-icon {
+        font-size: 2.8rem;
+        filter: drop-shadow(0 0 12px rgba(212,168,83,0.4));
+        animation: pigeonFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes emblemReveal {
+        0% { opacity: 0; transform: scale(0.5) rotate(-10deg); }
+        100% { opacity: 1; transform: scale(1) rotate(0deg); }
+    }
+    @keyframes pigeonFloat {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-6px); }
+    }
+
+    /* Title */
+    .splash-title {
+        font-family: 'Outfit', sans-serif;
+        font-weight: 800;
+        font-size: clamp(1.8rem, 7vw, 2.8rem);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        background: linear-gradient(135deg, #f0d78c 0%, #d4a853 30%, #b8892a 60%, #d4a853 80%, #f0d78c 100%);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        filter: drop-shadow(0 2px 8px rgba(212,168,83,0.3));
+        margin: 0;
+        line-height: 1.1;
+        animation: titleReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both, goldShimmer 4s linear 2s infinite;
+    }
+
+    @keyframes titleReveal {
+        0% { opacity: 0; transform: translateY(20px); letter-spacing: 8px; }
+        100% { opacity: 1; transform: translateY(0); letter-spacing: 2px; }
+    }
+    @keyframes goldShimmer {
+        0% { background-position: 0% center; }
+        100% { background-position: 200% center; }
+    }
+
+    /* Subtitle / Tagline */
+    .splash-tagline {
+        font-family: 'Inter', sans-serif;
+        font-weight: 300;
+        font-size: clamp(0.85rem, 3vw, 1.1rem);
+        color: rgba(240, 215, 140, 0.7);
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-top: 8px;
+        animation: taglineReveal 1s ease-out 1.3s both;
+    }
+    @keyframes taglineReveal {
+        0% { opacity: 0; transform: translateY(10px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Ornate separator line */
+    .splash-separator {
+        width: 180px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(212,168,83,0.5), transparent);
+        margin: 20px auto;
+        position: relative;
+        animation: separatorReveal 1s ease-out 1.5s both;
+    }
+    .splash-separator::before {
+        content: '◆';
+        position: absolute;
+        top: -6px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.5rem;
+        color: rgba(212,168,83,0.6);
+    }
+    @keyframes separatorReveal {
+        0% { opacity: 0; width: 0; }
+        100% { opacity: 1; width: 180px; }
+    }
+
+    /* Loading area */
+    .splash-loading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        animation: loadingReveal 0.8s ease-out 1.8s both;
+    }
+    @keyframes loadingReveal {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+
+    .splash-progress-track {
+        width: 240px;
+        height: 3px;
+        background: rgba(255,255,255,0.08);
+        border-radius: 2px;
+        overflow: hidden;
+        position: relative;
+    }
+    .splash-progress-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #b8892a, #d4a853, #f0d78c);
+        border-radius: 2px;
+        transition: width 0.4s ease;
+        box-shadow: 0 0 8px rgba(212,168,83,0.4);
+    }
+
+    .splash-status {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.7rem;
+        color: rgba(200, 200, 200, 0.5);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+    /* Bottom credits */
+    .splash-credits {
+        position: absolute;
+        bottom: 24px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        z-index: 2;
+        animation: creditsReveal 1s ease-out 2.5s both;
+    }
+    .splash-credits p {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.6rem;
+        color: rgba(200, 200, 200, 0.3);
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin: 0;
+        line-height: 1.6;
+    }
+    @keyframes creditsReveal {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+
+    /* Splash fade-out */
+    .splash-screen.fade-out {
+        animation: splashFadeOut 1s ease-in-out forwards;
+    }
+    @keyframes splashFadeOut {
+        0% { opacity: 1; }
+        100% { opacity: 0; pointer-events: none; }
+    }
+
+    /* ============================================================
+       RESPONSIVE REFINEMENTS
+       ============================================================ */
+    @media (min-width: 600px) {
+        .splash-emblem { width: 120px; height: 120px; }
+        .splash-pigeon-icon { font-size: 3.5rem; }
+        .splash-progress-track { width: 300px; }
+    }
+    </style>
+</head>
+<body>
+    <!-- ======== CINEMATIC SPLASH SCREEN ======== -->
+    <div id="loading-screen" class="splash-screen">
+        <!-- Hero Background -->
+        <div class="splash-bg"></div>
+
+        <!-- Floating feather particles -->
+        <div class="splash-feathers">
+            <div class="feather">🪶</div>
+            <div class="feather">🪶</div>
+            <div class="feather">🪶</div>
+            <div class="feather">🪶</div>
+            <div class="feather">🪶</div>
+            <div class="feather">🪶</div>
+            <div class="feather">🪶</div>
+            <div class="feather">🪶</div>
+        </div>
+
+        <!-- Logo + Loading -->
+        <div class="splash-content">
+            <!-- Ornate emblem -->
+            <div class="splash-emblem">
+                <div class="splash-emblem-inner">
+                    <span class="splash-pigeon-icon">🕊️</span>
+                </div>
+            </div>
+
+            <!-- Title -->
+            <h1 class="splash-title">World of<br>Pigeon's</h1>
+
+            <!-- Tagline -->
+            <p class="splash-tagline" data-i18n="loading.subtitle">Gökyüzünü senin sürün dolduracak</p>
+
+            <!-- Ornate separator -->
+            <div class="splash-separator"></div>
+
+            <!-- Loading -->
+            <div class="splash-loading">
+                <div class="splash-progress-track">
+                    <div class="splash-progress-fill" id="loading-bar"></div>
+                </div>
+                <p class="splash-status" id="loading-status" data-i18n="loading.preparing">Hazırlanıyor...</p>
+            </div>
+        </div>
+
+        <!-- Bottom credits -->
+        <div class="splash-credits">
+            <p>© 2026 Erdem Yılmaz</p>
+            <p>worldofpigeons.com</p>
+        </div>
+    </div>
+
+    <!-- ======== MAIN GAME CONTAINER ======== -->
+    <div id="game-container" class="game-container hidden">
+        
+        <!-- HUD (Top Bar) -->
+        <header id="hud" class="hud">
+            <div class="hud-left">
+                <div class="hud-level" id="hud-level">
+                    <span class="hud-level-badge">1</span>
+                </div>
+                <span class="hud-player-name" id="hud-player-name"></span>
+            </div>
+            <div class="hud-currencies">
+                <div class="currency-item" id="currency-feed" title="Yem Parası">
+                    <span class="currency-icon">🌾</span>
+                    <span class="currency-value" id="currency-feed-value">0</span>
+                </div>
+                <div class="currency-item" id="currency-token" title="Bilezik">
+                    <span class="currency-icon">🏅</span>
+                    <span class="currency-value" id="currency-token-value">0</span>
+                </div>
+                <div class="currency-item" id="currency-diamond" title="Elmas">
+                    <span class="currency-icon">💎</span>
+                    <span class="currency-value" id="currency-diamond-value">0</span>
+                </div>
+            </div>
+            <div class="hud-right">
+                <button class="hud-btn" id="btn-settings" aria-label="Settings">⚙️</button>
+                <button class="hud-btn" id="btn-notifications" aria-label="Notifications">
+                    🔔<span class="notification-badge hidden" id="notification-badge">0</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Canvas Layer (Flight Scene) -->
+        <canvas id="game-canvas" class="game-canvas"></canvas>
+
+        <!-- Screen Container (DOM-based UI screens) -->
+        <div id="screen-container" class="screen-container">
+            <!-- Screens are dynamically injected here -->
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav id="bottom-nav" class="bottom-nav">
+            <button class="nav-tab active" data-screen="coop" id="nav-coop">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-label" data-i18n="nav.coop">Kümes</span>
+            </button>
+            <button class="nav-tab" data-screen="flight" id="nav-flight">
+                <span class="nav-icon">🕊️</span>
+                <span class="nav-label" data-i18n="nav.flight">Uçuş</span>
+            </button>
+            <button class="nav-tab" data-screen="flock" id="nav-flock">
+                <span class="nav-icon">📋</span>
+                <span class="nav-label" data-i18n="nav.flock">Sürü</span>
+            </button>
+            <button class="nav-tab" data-screen="market" id="nav-market">
+                <span class="nav-icon">🏪</span>
+                <span class="nav-label" data-i18n="nav.market">Pazar</span>
+            </button>
+            <button class="nav-tab" data-screen="more" id="nav-more">
+                <span class="nav-icon">⭐</span>
+                <span class="nav-label" data-i18n="nav.more">Diğer</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div id="modal-overlay" class="modal-overlay hidden">
+        <div class="modal-content" id="modal-content"></div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Settings Panel -->
+    <div id="settings-panel" class="settings-panel hidden">
+        <div class="settings-content glass-panel">
+            <div class="settings-header">
+                <h2 data-i18n="settings.title">Ayarlar</h2>
+                <button class="close-btn" id="settings-close">✕</button>
+            </div>
+            <div class="settings-body">
+                <div class="setting-row">
+                    <label data-i18n="settings.language">Dil</label>
+                    <select id="setting-language" class="setting-select">
+                        <option value="tr">Türkçe</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+                <div class="setting-row">
+                    <label data-i18n="settings.sound">Ses Efektleri</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="setting-sound" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="setting-row">
+                    <label data-i18n="settings.music">Müzik</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="setting-music" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="setting-row">
+                    <label data-i18n="settings.notifications">Bildirimler</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="setting-notifications" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="setting-row" style="margin-top:16px;border-top:1px solid rgba(255,255,255,0.05);padding-top:16px">
+                    <label>Kayıt Sıfırla</label>
+                    <button class="btn btn-sm" id="btn-reset-save" 
+                        style="background:rgba(244,67,54,0.15);color:#ef5350;border:1px solid rgba(244,67,54,0.3)">
+                        Sıfırla
+                    </button>
+                </div>
+            </div>
+            <div class="settings-footer">
+                <p class="copyright">© 2026 Erdem YILMAZ</p>
+                <p class="version">v0.1.0-MVP · worldofpigeons.com</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/core/i18n.js"></script>
+    <script src="js/core/events.js"></script>
+    <script src="js/core/audio.js"></script>
+    <script src="js/core/save.js"></script>
+    <script src="js/core/time.js"></script>
+    <script src="js/data/breeds.js"></script>
+    <script src="js/data/items.js"></script>
+    <script src="js/data/diseases.js"></script>
+    <script src="js/data/threats.js"></script>
+    <script src="js/data/tricks.js"></script>
+    <script src="js/systems/genetics.js"></script>
+    <script src="js/systems/economy.js"></script>
+    <script src="js/systems/breeding.js"></script>
+    <script src="js/systems/training.js"></script>
+    <script src="js/systems/flight.js"></script>
+    <script src="js/systems/health.js"></script>
+    <script src="js/systems/loyalty.js"></script>
+    <script src="js/systems/attraction.js"></script>
+    <script src="js/systems/threats-system.js"></script>
+    <script src="js/systems/synergy.js"></script>
+    <script src="js/systems/market.js"></script>
+    <script src="js/render/sky.js"></script>
+    <script src="js/render/pigeon-sprite.js"></script>
+    <script src="js/render/particles.js"></script>
+    <script src="js/render/camera.js"></script>
+    <script src="js/ui/hud.js"></script>
+    <script src="js/ui/screens.js"></script>
+    <script src="js/ui/coop.js"></script>
+    <script src="js/ui/flight-view.js"></script>
+    <script src="js/ui/flock.js"></script>
+    <script src="js/ui/breeding-ui.js"></script>
+    <script src="js/ui/health-ui.js"></script>
+    <script src="js/ui/market-ui.js"></script>
+    <script src="js/ui/competition-ui.js"></script>
+    <script src="js/ui/quests-ui.js"></script>
+    <script src="js/ui/onboarding.js"></script>
+    <script src="js/core/game.js"></script>
+</body>
+</html>

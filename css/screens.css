@@ -1,0 +1,772 @@
+/* ============================================================
+   WORLD OF PIGEON'S — Screen-Specific Styles
+   Individual screen layouts and components
+   ============================================================ */
+
+/* ================ COOP SCREEN ================ */
+.screen-coop {
+    padding: var(--space-md);
+}
+
+.coop-header {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+}
+
+.coop-header h1 {
+    font-family: var(--font-display);
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--gold-300), var(--gold-500));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.coop-header .coop-subtitle {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
+/* Quick Action Bar */
+.quick-actions {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+}
+
+.quick-action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: var(--space-sm);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    border-width: 1px;
+    border-style: solid;
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+}
+
+.quick-action-btn:active { transform: scale(0.95); }
+.quick-action-btn:hover { border-color: var(--gold-500); }
+
+.quick-action-btn .action-icon { font-size: 1.4rem; }
+.quick-action-btn .action-label {
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+}
+
+.quick-action-btn.needs-attention {
+    border-color: var(--warning);
+    animation: attentionPulse 2s ease-in-out infinite;
+}
+
+@keyframes attentionPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 152, 0, 0); }
+    50% { box-shadow: 0 0 0 4px rgba(255, 152, 0, 0.15); }
+}
+
+/* Coop Status Cards */
+.coop-status-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+}
+
+.status-card {
+    padding: var(--space-md);
+    text-align: center;
+}
+
+.status-card .status-icon {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-xs);
+}
+
+.status-card .status-value {
+    font-family: var(--font-display);
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--gold-300);
+}
+
+.status-card .status-label {
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+    margin-top: 2px;
+}
+
+/* Pigeon List in Coop */
+.coop-pigeon-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+/* ================ FLIGHT SCREEN ================ */
+.screen-flight { padding: 0; }
+
+.flight-pre {
+    padding: var(--space-md);
+}
+
+.flight-pre h2 {
+    font-family: var(--font-display);
+    font-size: var(--font-size-xl);
+    color: var(--gold-300);
+    margin-bottom: var(--space-md);
+    text-align: center;
+}
+
+/* Flock Selection Grid */
+.flock-select-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+}
+
+.flock-select-item {
+    padding: var(--space-sm);
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.flock-select-item.selected {
+    border-color: var(--gold-500);
+    box-shadow: 0 0 12px rgba(212, 168, 83, 0.2);
+}
+
+.flock-select-item .select-check {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 22px;
+    height: 22px;
+    border-radius: var(--radius-full);
+    background: var(--gold-500);
+    color: var(--navy-900);
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+}
+
+.flock-select-item.selected .select-check { opacity: 1; }
+
+/* Flight Controls Overlay */
+.flight-controls {
+    position: absolute;
+    bottom: var(--space-lg);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: var(--space-md);
+    z-index: 50;
+}
+
+.flight-controls .btn {
+    min-width: 100px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+/* View Toggle */
+.view-toggle {
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+    z-index: 50;
+    display: flex;
+    background: rgba(0,0,0,0.4);
+    border-radius: var(--radius-lg);
+    padding: 3px;
+    backdrop-filter: blur(8px);
+}
+
+.view-toggle button {
+    padding: 6px 14px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-family: var(--font-ui);
+    font-size: var(--font-size-sm);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.view-toggle button.active {
+    background: var(--gold-500);
+    color: var(--navy-900);
+    font-weight: 600;
+}
+
+/* Flight Score Display */
+.flight-score {
+    position: absolute;
+    top: var(--space-md);
+    left: var(--space-md);
+    z-index: 50;
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--glass-border);
+}
+
+.flight-score .score-value {
+    font-family: var(--font-display);
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    color: var(--gold-300);
+}
+
+.flight-score .score-label {
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+}
+
+/* Trick Notification */
+.trick-notification {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 60;
+    text-align: center;
+    pointer-events: none;
+}
+
+.trick-name {
+    font-family: var(--font-display);
+    font-size: var(--font-size-2xl);
+    font-weight: 800;
+    color: white;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+    animation: trickPop 0.8s ease forwards;
+}
+
+.trick-score {
+    font-family: var(--font-display);
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--gold-300);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    animation: trickPop 0.8s ease 0.15s forwards;
+    opacity: 0;
+}
+
+@keyframes trickPop {
+    0% { opacity: 0; transform: scale(0.5) translateY(20px); }
+    30% { opacity: 1; transform: scale(1.2) translateY(-5px); }
+    100% { opacity: 0; transform: scale(1) translateY(-40px); }
+}
+
+/* Threat Warning */
+.threat-warning {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 55;
+    padding: var(--space-sm) var(--space-lg);
+    background: rgba(244, 67, 54, 0.85);
+    border-radius: var(--radius-md);
+    color: white;
+    font-weight: 700;
+    font-size: var(--font-size-lg);
+    animation: threatFlash 0.5s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+
+@keyframes threatFlash {
+    0% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* Flight Summary */
+.flight-summary {
+    padding: var(--space-lg);
+}
+
+.flight-summary h2 {
+    font-family: var(--font-display);
+    font-size: var(--font-size-xl);
+    color: var(--gold-300);
+    text-align: center;
+    margin-bottom: var(--space-lg);
+}
+
+.summary-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.summary-stat {
+    text-align: center;
+}
+
+.summary-stat .stat-number {
+    font-family: var(--font-display);
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    color: var(--gold-300);
+}
+
+.summary-stat .stat-desc {
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+}
+
+/* ================ FLOCK SCREEN ================ */
+.screen-flock { padding: var(--space-md); }
+
+.flock-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-md);
+}
+
+.flock-search {
+    position: relative;
+    margin-bottom: var(--space-md);
+}
+
+.flock-search .search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+}
+
+.flock-search input {
+    padding-left: 36px;
+}
+
+.flock-filters {
+    display: flex;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+}
+
+.flock-filters::-webkit-scrollbar { display: none; }
+
+.filter-chip {
+    padding: 6px 14px;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: var(--font-ui);
+    font-size: var(--font-size-xs);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all var(--transition-fast);
+}
+
+.filter-chip.active {
+    background: var(--gold-500);
+    color: var(--navy-900);
+    border-color: var(--gold-500);
+    font-weight: 600;
+}
+
+.flock-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+/* ================ BREEDING SCREEN ================ */
+.screen-breeding { padding: var(--space-md); }
+
+.breeding-pair {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.breeding-slot {
+    flex: 1;
+    padding: var(--space-lg);
+    text-align: center;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.breeding-slot.empty {
+    border-style: dashed;
+    border-color: var(--text-muted);
+}
+
+.breeding-slot .slot-icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--space-sm);
+}
+
+.breeding-slot .slot-label {
+    font-size: var(--font-size-sm);
+    color: var(--text-muted);
+}
+
+.breeding-connector {
+    font-size: 1.5rem;
+    color: var(--gold-500);
+    flex-shrink: 0;
+}
+
+/* Incubation Timer */
+.incubation-card {
+    padding: var(--space-lg);
+    text-align: center;
+    margin-bottom: var(--space-md);
+}
+
+.incubation-card .egg-icon {
+    font-size: 3rem;
+    margin-bottom: var(--space-sm);
+    animation: eggWobble 2s ease-in-out infinite;
+}
+
+@keyframes eggWobble {
+    0%, 100% { transform: rotate(0); }
+    25% { transform: rotate(-5deg); }
+    75% { transform: rotate(5deg); }
+}
+
+.incubation-card .timer-text {
+    font-family: var(--font-display);
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--gold-300);
+}
+
+/* ================ MARKET SCREEN ================ */
+.screen-market { padding: var(--space-md); }
+
+.market-categories {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+}
+
+.market-category {
+    padding: var(--space-md);
+    text-align: center;
+    cursor: pointer;
+}
+
+.market-category .category-icon {
+    font-size: 2rem;
+    margin-bottom: var(--space-xs);
+}
+
+.market-category .category-name {
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+}
+
+.market-category .category-count {
+    font-size: var(--font-size-xs);
+    color: var(--text-muted);
+}
+
+/* Market Item */
+.market-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+    margin-bottom: var(--space-sm);
+}
+
+.market-item .item-icon {
+    font-size: 1.5rem;
+    width: 40px;
+    text-align: center;
+}
+
+.market-item .item-info { flex: 1; }
+
+.market-item .item-name {
+    font-weight: 500;
+    font-size: var(--font-size-md);
+}
+
+.market-item .item-desc {
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+}
+
+.market-item .item-price {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 700;
+    color: var(--gold-300);
+    font-size: var(--font-size-sm);
+}
+
+/* ================ HEALTH SCREEN ================ */
+.screen-health { padding: var(--space-md); }
+
+.health-overview {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+}
+
+.health-stat {
+    padding: var(--space-md);
+    text-align: center;
+}
+
+.health-stat .health-number {
+    font-family: var(--font-display);
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+}
+
+.health-stat .health-label {
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+}
+
+/* Quarantine Section */
+.quarantine-zone {
+    border: 2px dashed rgba(244,67,54,0.3);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    margin-top: var(--space-md);
+}
+
+.quarantine-zone .zone-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    color: #ef5350;
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+}
+
+/* ================ COMPETITION SCREEN ================ */
+.screen-competition { padding: var(--space-md); }
+
+.competition-types {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+}
+
+.competition-type {
+    padding: var(--space-md);
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.competition-type:hover {
+    border-color: var(--gold-500);
+}
+
+.competition-type .comp-icon {
+    font-size: 2rem;
+    margin-bottom: var(--space-xs);
+}
+
+.competition-type .comp-name {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+}
+
+/* Ranking List */
+.ranking-list {
+    counter-reset: rank;
+}
+
+.ranking-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+    margin-bottom: var(--space-xs);
+    border-radius: var(--radius-md);
+    background: var(--glass-bg);
+}
+
+.ranking-item .rank-number {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--font-size-sm);
+    flex-shrink: 0;
+}
+
+.ranking-item:nth-child(1) .rank-number { background: var(--gold-500); color: var(--navy-900); }
+.ranking-item:nth-child(2) .rank-number { background: #c0c0c0; color: var(--navy-900); }
+.ranking-item:nth-child(3) .rank-number { background: #cd7f32; color: white; }
+
+/* ================ QUEST SCREEN ================ */
+.screen-quests { padding: var(--space-md); }
+
+.quest-item {
+    padding: var(--space-md);
+    margin-bottom: var(--space-sm);
+}
+
+.quest-item .quest-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-sm);
+}
+
+.quest-item .quest-title {
+    font-weight: 600;
+    font-size: var(--font-size-md);
+}
+
+.quest-item .quest-reward {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--font-size-sm);
+    color: var(--gold-400);
+    font-weight: 600;
+}
+
+.quest-item .quest-progress {
+    margin-top: var(--space-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.quest-item .quest-progress .progress-text {
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+    min-width: 40px;
+}
+
+/* ================ MORE MENU ================ */
+.screen-more { padding: var(--space-md); }
+
+.more-menu {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.more-menu-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    cursor: pointer;
+}
+
+.more-menu-item .menu-icon {
+    font-size: 1.3rem;
+    width: 40px;
+    text-align: center;
+}
+
+.more-menu-item .menu-label {
+    font-size: var(--font-size-md);
+    font-weight: 500;
+}
+
+.more-menu-item .menu-arrow {
+    margin-left: auto;
+    color: var(--text-muted);
+}
+
+/* ================ ONBOARDING OVERLAY ================ */
+.onboarding-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(6px);
+}
+
+.onboarding-card {
+    max-width: 380px;
+    width: calc(100% - var(--space-lg) * 2);
+    padding: var(--space-xl);
+    text-align: center;
+}
+
+.onboarding-card .onboarding-icon {
+    font-size: 4rem;
+    margin-bottom: var(--space-md);
+}
+
+.onboarding-card .onboarding-title {
+    font-family: var(--font-display);
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--gold-300);
+    margin-bottom: var(--space-sm);
+}
+
+.onboarding-card .onboarding-text {
+    font-size: var(--font-size-md);
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: var(--space-lg);
+}
+
+.onboarding-steps {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+}
+
+.onboarding-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-full);
+    background: var(--navy-500);
+    transition: all var(--transition-normal);
+}
+
+.onboarding-dot.active {
+    background: var(--gold-500);
+    width: 24px;
+}

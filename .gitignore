@@ -1,0 +1,13 @@
+# Ignore all design documents, PDFs, and sensitive files
+1- Claude Aşamaları - 26.6.26/
+2- Güvercin Dökümanları/
+3- Rar Dosyaları/
+4- Logolar/
+*.docx
+*.pdf
+*.pptx
+*.xlsx
+*.md
+*.blend
+*.py
+*.zip
